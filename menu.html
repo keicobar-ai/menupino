@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Menú Digital | Cabaña Los Pinos</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&amp;family=Montserrat:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f4efe6;
+      background-image: url('https://www.transparenttextures.com/patterns/paper.png');
+    }
+    .title-font {
+      font-family: 'Cinzel', serif;
+    }
+    .logo-menu {
+      width: 105px;
+      height: auto;
+      margin: 0 auto 12px auto;
+      display: block;
+      opacity: 0.96;
+    }
+
+
+    .welcome-card {
+      border: 1px solid #000;
+      padding: 1rem;
+      margin: 0 0 1.25rem;
+      text-align: center;
+      background: rgba(255,255,255,.25);
+    }
+    .welcome-card p {
+      margin: 0;
+      line-height: 1.55;
+    }
+    .specialties-title {
+      font-family: 'Cinzel', serif;
+      font-size: .95rem;
+      letter-spacing: 2px;
+      font-weight: 600;
+      text-align: center;
+      margin: 0 0 .75rem;
+    }
+    .specialties-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .5rem;
+      margin-bottom: 1.5rem;
+    }
+    .specialty-link {
+      border: 1px solid #000;
+      padding: .5rem .35rem;
+      font-size: .72rem;
+      letter-spacing: .5px;
+      text-align: center;
+      background: rgba(255,255,255,.25);
+      transition: background-color .2s, color .2s;
+      cursor: pointer;
+    }
+    .specialty-link:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 4px;
+      font-size: 1.5rem; /* Aumentado para resaltar */
+      font-weight: bold; /* En negrita */
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #000;
+      padding-bottom: .4rem;
+    }
+    .divider {
+      border-top: 1px solid #000;
+      margin: 1.5rem 0;
+    }
+    .tab-active {
+      background: black;
+      color: white;
+    }
+    .sticky-tabs {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: #f4efe6;
+      background-image: url('https://www.transparenttextures.com/patterns/paper.png');
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    }
+    .nav-btn {
+      border: 1px solid black;
+      padding: .4rem 1rem;
+      font-size: .8rem;
+      letter-spacing: 1px;
+    }
+    .small-note {
+      font-size: .75rem;
+      font-style: italic;
+    }
+    .menu-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .menu-note {
+      margin-bottom: 1rem;
+    }
+
+    .item-detail {
+      display: block;
+      font-size: .68rem;
+      font-style: italic;
+      font-weight: 700;
+      letter-spacing: .2px;
+      line-height: 1.25;
+      margin-top: .12rem;
+      opacity: .82;
+    }
+    .social-link {
+      display: inline-block;
+      border-bottom: 1px solid #000;
+      padding-bottom: 1px;
+      color: inherit;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .social-link svg { width: 16px; height: 16px; vertical-align: -3px; margin-right: 4px; fill: currentColor; }
+    .social-link:hover {
+      opacity: .75;
+    }
+
+    #back-to-top {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+    #back-to-top:hover {
+      opacity: 1;
+    }
+
+
+    .menu-topbar {
+      position: sticky; top: 0; z-index: 80; width: 100%; min-height: 58px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 8px max(16px, calc((100% - 860px)/2));
+      background: rgba(244,239,230,.96); backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px); box-shadow: 0 3px 12px rgba(33,44,36,.09);
+    }
+    .menu-home { color: #29473a; text-decoration: none; font: 600 .88rem Arial,sans-serif; white-space: nowrap; }
+    .menu-whatsapp { display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 40px; padding: 8px 15px; border: 1px solid rgba(37,145,81,.25);
+      border-radius: 999px; color: #fff; background: rgba(36,137,76,.9);
+      box-shadow: 0 3px 10px rgba(27,57,39,.15); text-decoration: none;
+      font: 600 .82rem Arial,sans-serif; transition: background .2s,transform .2s; }
+    .menu-whatsapp:hover,.menu-whatsapp:focus-visible { background: #218447; transform: translateY(-1px); outline: 2px solid #fff; outline-offset: 2px; }
+    .menu-whatsapp svg { width: 21px; height: 21px; fill: currentColor; flex: 0 0 auto; }
+    .sticky-tabs { top: 58px; }
+    @media(max-width:480px) { .menu-topbar { min-height: 54px; padding: 7px 12px; gap: 8px; } .menu-home {font-size:.8rem}.menu-whatsapp {min-height:38px;padding:7px 11px;font-size:.74rem;gap:6px}.menu-whatsapp svg{width:19px;height:19px}.sticky-tabs{top:54px} }
+
+    html {
+      scroll-behavior: smooth;
+    }
+    .category-index {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .5rem;
+      margin: 1rem 0 1.5rem;
+    }
+    .category-index a {
+      border: 1px solid #000;
+      padding: .45rem .35rem;
+      font-size: .72rem;
+      letter-spacing: .5px;
+      text-align: center;
+      background: rgba(255,255,255,.25);
+      transition: background-color .2s, color .2s;
+    }
+    .category-index a:hover {
+      background: #000;
+      color: #fff;
+    }
+    .section-title {
+      scroll-margin-top: 4.5rem;
+    }
+    @media (max-width: 640px) {
+      .section-title {
+        font-size: 1.3rem; /* Ligeramente reducido en móvil para mejor legibilidad */
+      }
+    }
+
+    /* Ajustes de legibilidad para clientes mayores */
+    body {
+      font-size: 17px;
+      line-height: 1.45;
+    }
+
+    .max-w-md {
+      max-width: 30rem;
+    }
+
+    .menu-item {
+      font-size: 1rem;
+      line-height: 1.35;
+      gap: 0.75rem;
+      margin-bottom: 0.72rem;
+      align-items: start;
+    }
+
+    .menu-item span:first-child {
+      font-weight: 600;
+    }
+
+    .menu-item span:last-child {
+      font-weight: 700;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+
+    .small-note {
+      font-size: .88rem;
+      line-height: 1.45;
+    }
+
+    .item-detail {
+      font-size: .82rem;
+      line-height: 1.35;
+      margin-top: .18rem;
+      opacity: .95;
+    }
+
+    .category-index {
+      gap: .65rem;
+      margin: 1.15rem 0 1.7rem;
+    }
+
+    .category-index a,
+    .specialty-link {
+      font-size: .86rem;
+      line-height: 1.25;
+      padding: .68rem .45rem;
+      font-weight: 600;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .specialties-title {
+      font-size: 1.05rem;
+    }
+
+    nav[role="tablist"] button {
+      font-size: 1rem;
+      padding-top: .75rem;
+      padding-bottom: .75rem;
+    }
+
+    .section-title {
+      font-size: 1.55rem;
+      letter-spacing: 2.5px;
+      margin-top: 2.25rem;
+    }
+
+    .welcome-card {
+      padding: 1.05rem;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        font-size: 17px;
+      }
+
+      .section-title {
+        font-size: 1.42rem;
+        letter-spacing: 2px;
+      }
+
+      .menu-item {
+        font-size: 1.02rem;
+      }
+
+      .small-note {
+        font-size: .9rem;
+      }
+
+      .item-detail {
+        font-size: .84rem;
+      }
+    }
+
+  </style>
+</head>
+<body>
+<header class="menu-topbar"><a class="menu-home" href="index.html">← Inicio</a><a class="menu-whatsapp" href="https://wa.me/5215654518493?text=hola" target="_blank" rel="noopener noreferrer" aria-label="Consultar o reservar por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.8 11.8 0 0 0 12.12 0C5.58 0 .25 5.32.25 11.86c0 2.09.55 4.13 1.6 5.93L.16 24l6.36-1.67a11.9 11.9 0 0 0 5.6 1.43h.01c6.54 0 11.87-5.32 11.87-11.86 0-3.17-1.24-6.15-3.48-8.42Zm-8.4 18.27h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.77.99 1-3.67-.23-.38a9.83 9.83 0 0 1-1.52-5.24c0-5.47 4.46-9.92 9.94-9.92 2.65 0 5.14 1.03 7.02 2.91a9.86 9.86 0 0 1 2.91 7.02c0 5.47-4.46 9.92-9.94 9.92Zm5.45-7.43c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.18-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.08-.8.38-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.18-1.42-.08-.13-.28-.2-.58-.35Z"/></svg><span>Consulta o reserva por WhatsApp</span></a></header>
+<div class="max-w-md mx-auto p-4 sm:p-6">
+<!-- HEADER -->
+<header class="text-center mb-8">
+<img alt="Cabaña Los Pinos Restaurante Bar" class="logo-menu" src="assets/logo.webp"/>
+<h1 class="title-font text-4xl tracking-widest">MENÚ</h1>
+<p class="text-sm tracking-wider">RESTAURANTE - BAR</p>
+<p class="title-font text-lg mt-1">CABAÑA LOS PINOS</p>
+</header>
+<section class="welcome-card">
+<p class="small-note">
+    Disfruta el sabor del bosque en Cabaña Los Pinos:
+    comida típica mexicana, truchas frescas, conejo tradicional,
+    antojitos y bebidas para compartir en familia.
+  </p>
+</section>
+<section class="mb-6" id="especialidades-inicio">
+<p class="specialties-title">ESPECIALIDADES</p>
+<div class="specialties-grid">
+<button class="specialty-link" data-section="comida" data-target="#comida-truchas" type="button">TRUCHAS</button>
+<button class="specialty-link" data-section="comida" data-target="#comida-conejo" type="button">CONEJO</button>
+<button class="specialty-link" data-section="comida" data-target="#comida-parrilladas" type="button">PARRILLADAS</button>
+<button class="specialty-link" data-section="comida" data-target="#comida-antojitos" type="button">ANTOJITOS</button>
+<button class="specialty-link" data-section="bebidas" data-target="#bebidas-micheladas" type="button">MICHELADAS</button>
+<button class="specialty-link" data-section="bebidas" data-target="#bebidas-cervezas" type="button">CERVEZAS</button>
+</div>
+</section>
+
+<!-- TABS -->
+<nav class="flex mb-6 border border-black sticky-tabs" role="tablist">
+<button aria-controls="comida-section" aria-selected="true" class="w-1/2 py-2 text-sm font-semibold tab-active" id="tab-comida" role="tab">COMIDA</button>
+<button aria-controls="bebidas-section" aria-selected="false" class="w-1/2 py-2 text-sm font-semibold" id="tab-bebidas" role="tab">BEBIDAS</button>
+</nav>
+<!-- CONTENT WRAPPER -->
+<div id="content-wrapper">
+<!-- COMIDA SECTION -->
+<section aria-labelledby="tab-comida" id="comida-section" role="tabpanel">
+<p class="small-note menu-note text-center">ÍNDICE RÁPIDO DE COMIDA</p><div class="category-index"><a href="#comida-entradas">ENTRADAS</a><a href="#comida-sopas">SOPAS</a><a href="#comida-conejo">CONEJO</a><a href="#comida-parrilladas">PARRILLADAS</a><a href="#comida-carnes-asadas">CARNES ASADAS</a><a href="#comida-tlacoyos">TLACOYOS</a><a href="#comida-huaraches">HUARACHES</a><a href="#comida-quesadillas">QUESADILLAS</a><a href="#comida-truchas">TRUCHAS</a><a href="#comida-mojarras">MOJARRAS</a><a href="#comida-tacos">TACOS</a><a href="#comida-antojitos">ANTOJITOS</a><a href="#comida-barbacoa">BARBACOA</a><a href="#comida-postres">POSTRES</a></div><h2 class="section-title" id="comida-entradas">ENTRADAS</h2>
+<div class="menu-item"><span>ORDEN DE HUEVO</span><span>$110</span></div>
+<p class="small-note menu-note">Con jamón, o chorizo, y frijoles refritos</p>
+<div class="menu-item"><span>OMELETTE</span><span>$110</span></div>
+<p class="small-note menu-note">Con cualquier guiso acompañado de frijoles</p>
+<div class="menu-item"><span>OMELETTE COMBINADO</span><span>$125</span></div>
+<p class="small-note menu-note">Con dos ingredientes</p>
+<div class="menu-item"><span>QUESO FUNDIDO</span><span>$115</span></div>
+<div class="menu-item"><span>QUESO FUNDIDO CON CHORIZO</span><span>$150</span></div>
+<div class="menu-item"><span>QUESO FUNDIDO CON CHAMPIÑONES</span><span>$150</span></div>
+<div class="menu-item"><span>ORDEN DE GUACAMOLE</span><span>$70</span></div>
+<div class="menu-item"><span>ORDEN DE NOPALES</span><span>$70</span></div>
+<div class="menu-item"><span>ORDEN DE AGUACATE</span><span>$55</span></div>
+<div class="menu-item"><span>ORDEN DE FRIJOLES</span><span>$70</span></div>
+<div class="menu-item"><span>ORDEN MIXTA</span><span>$140</span></div>
+<p class="small-note menu-note">Con guacamole, queso panela y chicharrón duro</p>
+<div class="divider"></div>
+<h2 class="section-title" id="comida-sopas">SOPAS</h2>
+<div class="menu-item"><span>MEDULA</span><span>$100</span></div>
+<div class="menu-item"><span>AZTECA</span><span>$90</span></div>
+<div class="menu-item"><span>HONGOS</span><span>$90</span></div>
+<div class="menu-item"><span>CAMPESINA</span><span>$90</span></div>
+<div class="menu-item"><span>CONSOMÉ DE POLLO</span><span>$80</span></div>
+<div class="menu-item"><span>PANCITA DE RES</span><span>$100</span></div>
+<div class="menu-item"><span>ARROZ CON HUEVO AL GUSTO</span><span>$85</span></div>
+<div class="menu-item"><span>ARROZ CON PLÁTANO</span><span>$70</span></div>
+<div class="divider"></div>
+<h2 class="section-title" id="comida-conejo">CONEJO</h2>
+<div class="menu-item"><span>EN ADOBO POR PIEZA</span><span>$220</span></div>
+<p class="small-note menu-note">Con frijoles refritos y arroz</p>
+<div class="menu-item"><span>FRITO POR PIEZA</span><span>$220</span></div>
+<p class="small-note menu-note">Con frijoles refritos, aguacate y verduras</p>
+<div class="menu-item"><span>MOJO DE AJO POR PIEZA</span><span>$220</span></div>
+<p class="small-note menu-note">Con frijoles refritos, aguacate y verduras</p>
+<div class="divider"></div>
+<h2 class="section-title" id="comida-parrilladas">PARRILLADAS</h2>
+<div class="menu-item"><span>PARRILLADA INDIVIDUAL</span><span>$245</span></div>
+<p class="small-note menu-note"><strong>(acompañada de nopalitos, aguacate y queso fundido sobre nopal)</strong></p>
+<div class="menu-item"><span>PARRILLADA FAMILIAR</span><span>$590</span></div>
+<p class="small-note menu-note"><strong>(acompañada de nopalitos, aguacate y queso fundido sobre nopal)</strong></p>
+<div class="divider"></div>
+<h2 class="section-title" id="comida-carnes-asadas">CARNES ASADAS</h2>
+<div class="menu-item"><span>CECINA NATURAL</span><span>$190</span></div>
+<div class="menu-item"><span>CECINA ADOBADA</span><span>$190</span></div>
+<div class="menu-item"><span>COSTILLA</span><span>$190</span></div>
+<div class="menu-item"><span>BISTEC</span><span>$190</span></div>
+<div class="menu-item"><span>PECHUGA <small class="item-detail">(Asada o empanizada)</small></span><span>$190</span></div>
+<p class="small-note menu-note">Todas las carnes asadas van acompañadas de nopalitos, frijoles refritos, aguacate y ensalada de verduras, o solo chilaquiles y frijoles refritos</p>
+<div class="menu-item"><span>ARRACHERA</span><span>$265</span></div>
+<p class="small-note menu-note">Acompañada con guacamole, nopal asado, cebollas de cambray y chiles toreados</p>
+<div class="menu-item"><span>ORDEN DE ALAMBRE (RES O POLLO)</span><span>$190</span></div>
+<div class="menu-item"><span>ORDEN DE ALAMBRE HAWAIANO (RES O POLLO)</span><span>$215</span></div>
+<div class="menu-item"><span>BROCHETAS DE FILETE DE RES</span><span>$190</span></div>
+<div class="menu-item"><span>CHILAQUILES SENCILLOS</span><span>$110</span></div>
+<div class="menu-item"><span>CHILAQUILES CON HUEVO</span><span>$150</span></div>
+<div class="menu-item"><span>CHILAQUILES CON POLLO DESHEBRADO</span><span>$160</span></div>
+<div class="divider"></div>
+<h2 class="section-title" id="comida-tlacoyos">TLACOYOS</h2>
+<div class="menu-item"><span>HABA</span><span>$43</span></div>
+<div class="menu-item"><span>FRIJOL</span><span>$43</span></div>
+<div class="menu-item"><span>REQUESÓN</span><span>$43</span></div>
+<div class="menu-item"><span>MORONITAS</span><span>$48</span></div>
+<div class="menu-item"><span>CHICHARRÓN</span><span>$48</span></div>
+<div class="divider"></div>
+<h2 class="section-title" id="comida-huaraches">HUARACHES</h2>
+<div class="menu-item"><span>COSTILLA</span><span>$180</span></div>
+<div class="menu-item"><span>BISTEC</span><span>$180</span></div>
+<div class="menu-item"><span>CECINA ADOBADA</span><span>$180</span></div>
+<div class="menu-item"><span>CHORIZO <small class="item-detail">(Rojo o verde)</small></span><span>$180</span></div>
+<div class="menu-item"><span>CAMPECHANO</span><span>$190</span></div>
+<div class="divider"></div>
+<h2 class="section-title" id="comida-quesadillas">QUESADILLAS</h2>
+<div class="menu-item"><span>FLOR DE CALABAZA</span><span>$43</span></div>
+<div class="menu-item"><span>CHICHARRON</span><span>$43</span></div>
+<div class="menu-item"><span>QUESO</span><span>$43</span></div>
+<div class="menu-item"><span>REQUESÓN</span><span>$43</span></div>
+<div class="menu-item"><span>HONGOS</span><span>$43</span></div>
+<div class="menu-item"><span>RAJAS</span><span>$43</span></div>
+<div class="menu-item"><span>POLLO</span><span>$43</span></div>
+<div class="menu-item"><span>PICADILLO</span><span>$43</span></div>
+<div class="menu-item"><span>HUITLACOCHE</span><span>$43</span></div>
+<div class="menu-item"><span>QUELITES</span><span>$43</span></div>
+<div class="menu-item"><span>PAPAS CON CHORIZO</span><span>$43</span></div>
+<div class="menu-item"><span>COMBINADAS CON QUESO</span><span>$50</span></div>
+<div class="divider"></div>
+<h2 class="section-title" id="comida-truchas">TRUCHAS</h2>
+<div class="menu-item"><span>AL MOJO DE AJO</span><span>$250</span></div>
+<div class="menu-item"><span>FRITA</span><span>$240</span></div>
+<div class="menu-item"><span>SUIZA</span><span>$250</span></div>
+<div class="menu-item"><span>A LA DIABLA</span><span>$250</span></div>
+<div class="menu-item"><span>HAWAIANA</span><span>$250</span></div>
+<div class="menu-item"><span>EMPAPELADA</span><span>$240</span></div>
+<div class="menu-item"><span>A LA TALLA</span><span>$250</span></div>
+<div class="menu-item"><span>AL NOPAL</span><span>$250</span></div>
+<div class="menu-item"><span>AL CHIPOTLE</span><span>$250</span></div>
+<div class="menu-item"><span>AL DURAZNO</span><span>$250</span></div>
+<div class="menu-item"><span>FILETE EMPANIZADO</span><span>$240</span></div>
+<p class="small-note menu-note">Guarnición de trucha acompañada de ensalada y arroz</p>
+<div class="divider"></div>
+<h2 class="section-title" id="comida-mojarras">MOJARRAS</h2>
+<div class="menu-item"><span>AL MOJO DE AJO</span><span>$240</span></div>
+<div class="menu-item"><span>FRITA</span><span>$240</span></div>
+<div class="menu-item"><span>A LA DIABLA</span><span>$250</span></div>
+<p class="small-note menu-note">Guarnición de mojarra, acompañada de papas a la francesa y arroz</p>
+<div class="divider"></div>
+<h2 class="section-title" id="comida-tacos">TACOS</h2>
+<div class="menu-item"><span>CAMPECHANOS</span><span>$48</span></div>
+<div class="menu-item"><span>CECINA NATURAL</span><span>$43</span></div>
+<div class="menu-item"><span>CECINA ADOBADA</span><span>$43</span></div>
+<div class="menu-item"><span>COSTILLA</span><span>$55</span></div>
+<div class="menu-item"><span>CHORIZO</span><span>$43</span></div>
+<div class="menu-item"><span>BISTEC</span><span>$43</span></div>
+<div class="menu-item"><span>PLACERO</span><span>$43</span></div>
+<div class="menu-item"><span>MORONGA</span><span>$43</span></div>
+<div class="menu-item"><span>AL PASTOR</span><span>$43</span></div>
+<div class="menu-item"><span>POLLO</span><span>$43</span></div>
+<div class="menu-item"><span>CON QUESO FUNDIDO</span><span>+ $7</span></div>
+<div class="divider"></div>
+<h2 class="section-title" id="comida-antojitos">ANTOJITOS</h2>
+<div class="menu-item"><span>PAMBAZO</span><span>$85</span></div>
+<div class="menu-item"><span>PAMBAZO CON QUESILLO</span><span>$100</span></div>
+<div class="menu-item"><span>SOPE SENCILLO</span><span>$43</span></div>
+<div class="menu-item"><span>SOPE ESPECIAL</span><span>$50</span></div>
+<div class="menu-item"><span>SOPES CON QUESILLO</span><span>+$7</span></div>
+<div class="menu-item"><span>ORDEN DE SOPECITOS <small class="item-detail">(5 piezas)</small></span><span>$100</span></div>
+<div class="menu-item"><span>ORDEN DE SOPECITOS CON CARNE <small class="item-detail">(5 piezas)</small></span><span>$150</span></div>
+<div class="menu-item"><span>MOLE ROJO ARTESANAL</span><span>$225</span></div>
+<p class="small-note menu-note">Acompañado con arroz y pollo</p>
+<div class="menu-item"><span>ENCHILADAS DE MOLE</span><span>$175</span></div>
+<div class="menu-item"><span>ENCHILADAS VERDES</span><span>$165</span></div>
+<div class="divider"></div>
+<h2 class="section-title" id="comida-barbacoa">BARBACOA</h2>
+<div class="menu-item"><span>POR KILO</span><span>$800</span></div>
+<div class="menu-item"><span>POR TACO</span><span>$48</span></div>
+<div class="menu-item"><span>CONSOMÉ</span><span>$70</span></div>
+<div class="menu-item"><span>POR ORDEN (DE TRES TACOS DORADOS)</span><span>$150</span></div>
+<div class="divider"></div>
+<h2 class="section-title" id="comida-postres">POSTRES</h2>
+<div class="menu-item"><span>PAY DE LIMÓN</span><span>$45</span></div>
+<div class="menu-item"><span>FRESAS CON CREMA</span><span>$70</span></div>
+<div class="menu-item"><span>DURAZNOS EN ALMÍBAR</span><span>$50</span></div>
+<div class="menu-item"><span>FLAN NAPOLITANO</span><span>$70</span></div>
+<div class="menu-item"><span>PAN DE NATA <small class="item-detail">(1 pieza)</small></span><span>$16</span></div>
+<div class="menu-item"><span>PAN DE NATA <small class="item-detail">(1 bolsa)</small></span><span>$90</span></div>
+<div class="menu-item"><span>PAN CON LECHERA</span><span>$28</span></div>
+<div class="menu-item"><span>PAPAS A LA FRANCESA <small class="item-detail">(Una orden)</small></span><span>$70</span></div>
+</section>
+<!-- BEBIDAS SECTION -->
+<section aria-labelledby="tab-bebidas" class="hidden" id="bebidas-section" role="tabpanel">
+<p class="small-note menu-note text-center">ÍNDICE RÁPIDO DE BEBIDAS</p><div class="category-index"><a href="#bebidas-agua">AGUA</a><a href="#bebidas-refrescos">REFRESCOS</a><a href="#bebidas-cafeteria">CAFETERÍA</a><a href="#bebidas-jarritos">JARRITOS</a><a href="#bebidas-bebidas">BEBIDAS</a><a href="#bebidas-micheladas">MICHELADAS</a><a href="#bebidas-cervezas">CERVEZAS</a><a href="#bebidas-pagos">PAGOS</a><a href="#bebidas-siguenos">SÍGUENOS</a></div><h2 class="section-title" id="bebidas-agua">AGUA</h2>
+<div class="menu-item"><span>1 JARRA <small class="item-detail">(2 litros de agua de sabor)</small></span><span>$140</span></div>
+<div class="menu-item"><span>1 VASO <small class="item-detail">(500 ml de agua de sabor)</small></span><span>$45</span></div>
+<div class="menu-item"><span>AGUA EMBOTELLADA <small class="item-detail">(600 ml)</small></span><span>$22</span></div>
+<div class="menu-item"><span>AGUA EMBOTELLADA <small class="item-detail">(1 lt)</small></span><span>$30</span></div>
+<div class="divider"></div>
+<h2 class="section-title" id="bebidas-refrescos">REFRESCOS</h2>
+<div class="menu-item"><span>COCA COLA</span><span>$43</span></div>
+<div class="menu-item"><span>COCA COLA LIGHT</span><span>$43</span></div>
+<div class="menu-item"><span>REFRESCO DE 600 ML</span><span>$50</span></div>
+<div class="menu-item"><span>REFRESCO DE SABOR</span><span>$43</span></div>
+<div class="menu-item"><span>PEPSI</span><span>$43</span></div>
+<div class="menu-item"><span>BOING</span><span>$43</span></div>
+<div class="menu-item"><span>BOING DE 1/2</span><span>$48</span></div>
+<div class="menu-item"><span>REFRESCOS PREPARADOS</span><span>$70</span></div>
+<div class="divider"></div>
+<h2 class="section-title" id="bebidas-cafeteria">CAFETERÍA</h2>
+<div class="menu-item"><span>CAFE DE OLLA</span><span>$38</span></div>
+<div class="menu-item"><span>CAFE AMERICANO</span><span>$38</span></div>
+<div class="menu-item"><span>CAFE CON LECHE</span><span>$50</span></div>
+<div class="menu-item"><span>CHAMPURRADO</span><span>$43</span></div>
+<div class="menu-item"><span>TE</span><span>$38</span></div>
+<div class="menu-item"><span>TISANA</span><span>$50</span></div>
+<div class="menu-item"><span>LECHE CON CHOCOMILK</span><span>$50</span></div>
+<div class="divider"></div>
+<h2 class="section-title" id="bebidas-jarritos">JARRITOS</h2>
+<div class="menu-item"><span>JARRITO <small class="item-detail">(Medio litro sin alcohol)</small></span><span>$75</span></div>
+<div class="menu-item"><span>JARRITO <small class="item-detail">(Medio litro con tequila de la casa)</small></span><span>$100</span></div>
+<div class="menu-item"><span>JARRITO <small class="item-detail">(Medio litro con tequila tradicional)</small></span><span>$135</span></div>
+<div class="menu-item"><span>JARRITO <small class="item-detail">(Un litro con tequila de la casa)</small></span><span>$200</span></div>
+<div class="menu-item"><span>JARRITO <small class="item-detail">(Un litro con tequila Centenario o Tradicional)</small></span><span>$250</span></div>
+<div class="divider"></div>
+<h2 class="section-title" id="bebidas-bebidas">BEBIDAS</h2>
+<div class="menu-item"><span>PIÑA COLADA <small class="item-detail">(Sin alcohol)</small></span><span>$100</span></div>
+<div class="menu-item"><span>PIÑA COLADA <small class="item-detail">(Con alcohol)</small></span><span>$140</span></div>
+<div class="menu-item"><span>JUGO DE NARANJA</span><span>$60</span></div>
+<div class="menu-item"><span>JUGO VERDE</span><span>$60</span></div>
+<div class="menu-item"><span>NARANJADA</span><span>$45</span></div>
+<div class="menu-item"><span>LIMONADA</span><span>$45</span></div>
+<div class="menu-item"><span>SANGRIA PREPARADA <small class="item-detail">(Sin alcohol)</small></span><span>$70</span></div>
+<div class="menu-item"><span>SANGRIA PREPARADA <small class="item-detail">(Con alcohol)</small></span><span>$100</span></div>
+<div class="menu-item"><span>PITUFOS</span><span>$100</span></div>
+<div class="menu-item"><span>MORITA</span><span>$100</span></div>
+<div class="menu-item"><span>MOJITO <small class="item-detail">(De hierbabuena)</small></span><span>$100</span></div>
+<div class="menu-item"><span>MOJITO <small class="item-detail">(De frutos rojos)</small></span><span>$110</span></div>
+<div class="menu-item"><span>MARACUYÁ CON MEZCAL</span><span>$110</span></div>
+<div class="menu-item"><span>QUEMADITAS</span><span>$110</span></div>
+<div class="menu-item"><span>PALOMA <small class="item-detail">(Con tequila Hornitos, Tradicional, Centenario o Plata)</small></span><span>$140</span></div>
+<div class="menu-item"><span>DON JULIO REPOSADO <small class="item-detail">(Caballito o paloma)</small></span><span>$160</span></div>
+<div class="menu-item"><span>DON JULIO 70 <small class="item-detail">(Caballito o paloma)</small></span><span>$170</span></div>
+<div class="menu-item"><span>HERRADURA <small class="item-detail">(Caballito o paloma)</small></span><span>$150</span></div>
+<div class="menu-item"><span>400 CONEJOS <small class="item-detail">(Caballito)</small></span><span>$130</span></div>
+<div class="menu-item"><span>WHISKY RED LABEL <small class="item-detail">(Caballito)</small></span><span>$130</span></div>
+<div class="menu-item"><span>CARAJILLO</span><span>$130</span></div>
+<div class="menu-item"><span>CURADO DE PULQUE <small class="item-detail">(1 litro)</small></span><span>$90</span></div>
+<div class="divider"></div>
+<h2 class="section-title" id="bebidas-micheladas">MICHELADAS</h2>
+<div class="menu-item"><span>MICHELADA CHICA <small class="item-detail">(Indio, Tecate, XX Lager, Bohemia)</small></span><span>$65</span></div>
+<div class="menu-item"><span>MICHELADA CHICA CON CLAMATO <small class="item-detail">(Indio, Tecate, XX Lager, Bohemia)</small></span><span>$70</span></div>
+<div class="menu-item"><span>MICHELADA CHICA <small class="item-detail">(Heineken, Miller High Life, Amstel Ultra, Noche Buena)</small></span><span>$70</span></div>
+<div class="menu-item"><span>MICHELADA CHICA CON CLAMATO <small class="item-detail">(Heineken, Miller High Life, Amstel Ultra, Noche Buena)</small></span><span>$75</span></div>
+<div class="menu-item"><span>MICHELADA GRANDE <small class="item-detail">(Indio, Tecate, XX Lager)</small></span><span>$125</span></div>
+<div class="menu-item"><span>MICHELADA GRANDE CON CLAMATO <small class="item-detail">(Indio, Tecate, XX Lager)</small></span><span>$135</span></div>
+<div class="menu-item"><span>MICHELADA GRANDE CON CLAMATO <small class="item-detail">(Miller High Life)</small></span><span>$135</span></div>
+<div class="divider"></div>
+<h2 class="section-title" id="bebidas-cervezas">CERVEZAS</h2>
+<div class="menu-item"><span>VICTORIA</span><span>$125</span></div>
+<div class="menu-item"><span>VICTORIA CON CLAMATO</span><span>$135</span></div>
+<div class="menu-item"><span>HEINEKEN CHICA</span><span>$65</span></div>
+<div class="menu-item"><span>HEINEKEN GRANDE</span><span>$125</span></div>
+<div class="menu-item"><span>MILLER HIGH LIFE CHICO</span><span>$65</span></div>
+<div class="menu-item"><span>MILLER HIGH LIFE GRANDE</span><span>$130</span></div>
+<div class="menu-item"><span>BOHEMIA</span><span>$55</span></div>
+<div class="menu-item"><span>TECATE ROJA</span><span>$55</span></div>
+<div class="menu-item"><span>TECATE LIGHT</span><span>$55</span></div>
+<div class="menu-item"><span>XX LAGER</span><span>$55</span></div>
+<div class="menu-item"><span>XX ÁMBAR</span><span>$55</span></div>
+<div class="menu-item"><span>INDIO</span><span>$55</span></div>
+<div class="menu-item"><span>AMSTEL ULTRA</span><span>$65</span></div>
+<div class="menu-item"><span>CERVEZA DE SABOR CHICA</span><span>$70</span></div>
+<div class="menu-item"><span>CERVEZA DE SABOR GRANDE</span><span>$135</span></div>
+<div class="menu-item"><span>NOCHE BUENA <small class="item-detail">(Solo en temporada)</small></span><span>$65</span></div>
+<div class="menu-item"><span>CERVEZA DE BOTE</span><span>$55</span></div>
+<div class="menu-item"><span>CERILLOS</span><span>$70</span></div>
+<div class="divider"></div>
+<h2 class="section-title" id="bebidas-pagos">PAGOS</h2>
+<p class="small-note menu-note leading-relaxed">
+          PUEDES PAGAR CON TARJETA SIN COMISIÓN, RECIBIMOS VISA Y MASTERCARD PARA MAYOR COMODIDAD DE NUESTROS VISITANTES.<br/><br/>
+          POR EL MOMENTO NO ACEPTAMOS AMERICAN EXPRESS.
+        </p>
+<div class="divider"></div>
+<h2 class="section-title" id="bebidas-siguenos">SÍGUENOS</h2>
+<p class="small-note menu-note">INSTAGRAM: <a class="social-link" href="https://www.instagram.com/lospinosmarqueza/" rel="noopener noreferrer" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 2h9.6A5.2 5.2 0 0 1 22 7.2v9.6a5.2 5.2 0 0 1-5.2 5.2H7.2A5.2 5.2 0 0 1 2 16.8V7.2A5.2 5.2 0 0 1 7.2 2Zm0 2A3.2 3.2 0 0 0 4 7.2v9.6A3.2 3.2 0 0 0 7.2 20h9.6a3.2 3.2 0 0 0 3.2-3.2V7.2A3.2 3.2 0 0 0 16.8 4H7.2Zm4.8 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-3.25a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z"/></svg>@LOSPINOSMARQUEZA</a></p>
+<p class="small-note menu-note">FACEBOOK: <a class="social-link" href="https://www.facebook.com/cabanalospinosrestaurantebar/" rel="noopener noreferrer" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.4 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v2.1H6.8v3.2h2.9V21h3.7Z"/></svg>CABANALOSPINOSRESTAURANTEBAR</a></p>
+<div class="divider"></div>
+<div class="text-center mt-8">
+<div class="text-2xl tracking-widest font-semibold">BUEN</div>
+<div class="text-3xl tracking-widest font-bold">PROVECHO</div>
+</div>
+</section>
+</div>
+</div>
+<button id="back-to-top" title="Volver al inicio">↑</button>
+<script>
+    const tabComida = document.getElementById("tab-comida");
+    const tabBebidas = document.getElementById("tab-bebidas");
+    const comidaSection = document.getElementById("comida-section");
+    const bebidasSection = document.getElementById("bebidas-section");
+    const backToTopBtn = document.getElementById("back-to-top");
+    const specialtyLinks = document.querySelectorAll(".specialty-link");
+
+    function updateTabs() {
+      const comidaVisible = !comidaSection.classList.contains("hidden");
+      const bebidasVisible = !bebidasSection.classList.contains("hidden");
+
+      tabComida.classList.toggle("tab-active", comidaVisible);
+      tabBebidas.classList.toggle("tab-active", bebidasVisible);
+      tabComida.setAttribute("aria-selected", comidaVisible);
+      tabBebidas.setAttribute("aria-selected", bebidasVisible);
+    }
+
+    function showSection(sectionName) {
+      if (sectionName === "bebidas") {
+        bebidasSection.classList.remove("hidden");
+        comidaSection.classList.add("hidden");
+      } else {
+        comidaSection.classList.remove("hidden");
+        bebidasSection.classList.add("hidden");
+      }
+      updateTabs();
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function scrollToTarget(targetSelector) {
+      const target = document.querySelector(targetSelector);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    tabComida.onclick = () => {
+      showSection("comida");
+      scrollToTop();
+    };
+
+    tabBebidas.onclick = () => {
+      showSection("bebidas");
+      scrollToTop();
+    };
+
+    specialtyLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        const sectionName = link.getAttribute("data-section");
+        const targetSelector = link.getAttribute("data-target");
+
+        showSection(sectionName);
+
+        setTimeout(() => {
+          scrollToTarget(targetSelector);
+        }, 80);
+      });
+    });
+
+    window.onscroll = () => {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    };
+
+    backToTopBtn.onclick = scrollToTop;
+
+    updateTabs();
+  </script>
+</body>
+</html>
